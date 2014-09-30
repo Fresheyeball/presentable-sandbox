@@ -1,11 +1,13 @@
-require! \gulp
-require! \gulp-purescript
-require! \gulp-livescript
-require! \gulp-concat
-require! \gulp-if
-require! \express
-require! \run-sequence
-require! \gulp-karma
+require! <[
+  gulp 
+  gulp-purescript 
+  gulp-livescript 
+  gulp-concat 
+  gulp-if 
+  express 
+  run-sequence 
+  gulp-karma
+]>
 
 paths =
   prod:
@@ -54,7 +56,7 @@ build = (k) -> ->
   psc = gulp-purescript.psc o
   lsc = gulp-livescript bare : true
 
-  psc.on "error", ({message}) ->
+  psc.on "error" ({message}) ->
     console.error message
     psc.end()
 
@@ -69,7 +71,7 @@ gulp.task "build:prod", build "prod"
 
 gulp.task "test:unit" ->
   gulp.src options.test.output .pipe gulp-karma(
-    configFile : "./tests/karma.conf.js"
+    configFile : "./karma.conf.ls"
     noColors   : true
     action     : "run"
   )
